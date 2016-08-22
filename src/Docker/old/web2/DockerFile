@@ -1,0 +1,8 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 5001
+
+ADD . /app
+WORKDIR /app
+RUN ["dotnet","restore"]
+RUN ["dotnet","ef","database","update"]
+ENTRYPOINT ["dotnet","run"]

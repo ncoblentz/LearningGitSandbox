@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+@{ 
+    var blah = "<script>alert(1)</script>";
+}
+@blah
+@Html.Raw(System.Text.Encodings.Web.HtmlEncoder.Default.Encode(blah))
+@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(blah))
+@Html.Raw(System.Text.Encodings.Web.UrlEncoder.Default.Encode(blah))
+
+@System.Text.Encodings.Web.HtmlEncoder.Default.Encode(blah)
+@System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(blah)
+@System.Text.Encodings.Web.UrlEncoder.Default.Encode(blah)
+<p>Use this area to provide additional information.</p>

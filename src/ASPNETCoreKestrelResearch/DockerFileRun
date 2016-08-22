@@ -1,0 +1,9 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 5000
+
+ADD . /app
+WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT Development
+RUN ["dotnet","restore"]
+
+ENTRYPOINT ["dotnet","run"]

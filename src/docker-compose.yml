@@ -1,0 +1,37 @@
+﻿version: '2'
+services:
+  database:
+    build: ./Docker/Database/
+    ports: 
+    - "5432:5432"
+  identityserver:
+    build: ./Host
+    ports:
+      - "1941:1941"
+#    links:
+#      - loadbalancer
+  web1:
+    build: ./ASPNETCoreKestrelResearch
+    ports:
+    - "5000:5000"
+#    links:
+#    - database
+#    - identityserver
+  web2: 
+    build: ./ASPNETCoreKestrelResearch
+    ports:
+    - "5001:5000"
+#    links:
+#    - database
+#    - identityserver
+  loadbalancer:
+    build: ./Docker/loadbalancer/
+    ports:
+    - "80:80"
+    - "443:443"
+#    - "1941:1941"
+    - "1943:1943"
+#    links:
+#    - web1
+#    - web2
+    command: haproxy -f /usr/local/etc/haproxy/haproxy.cfg

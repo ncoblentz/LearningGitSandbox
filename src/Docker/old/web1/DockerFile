@@ -1,0 +1,7 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 5000
+
+ADD bin/Debug/netcoreapp1.0/publish/ /app
+WORKDIR /app
+RUN ["dotnet","ef","database","update"]
+ENTRYPOINT ["dotnet","ASPNETCoreKestrelResearch.dll"]

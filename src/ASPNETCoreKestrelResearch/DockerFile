@@ -1,0 +1,13 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 5000
+
+RUN mkdir /usr/local/share/ca-certificates/loadbalancer/
+COPY ./ca.cert.pem /usr/local/share/ca-certificates/loadbalancer/ca.crt
+RUN update-ca-certificates
+
+ADD ./bin/Debug/netcoreapp1.0/publish /app
+ADD ./project.json /app/
+WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT Development
+
+ENTRYPOINT ["dotnet","ASPNETCoreKestrelResearch.dll"]

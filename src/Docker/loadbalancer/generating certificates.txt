@@ -1,0 +1,15 @@
+https://jamielinux.com/docs/openssl-certificate-authority/sign-server-and-client-certificates.html
+https://serversforhackers.com/using-ssl-certificates-with-haproxy
+
+remove passphrase
+openssl rsa -in futurestudio_with_pass.key -out futurestudio.key
+
+
+ln -s /etc/ssl/certs/fiddler.pem /etc/ssl/certs/`openssl x509 -hash -in /etc/ssl/certs/fiddler.pem -noout 2>/dev/null`.0
+echo /etc/ssl/certs/fiddler.pem >> /etc/ssl/certs/ca-certificates.crt
+
+
+solution
+RUN mkdir /usr/local/share/ca-certificates/loadbalancer/
+COPY ./ca.cert.pem /usr/local/share/ca-certificates/loadbalancer/ca.crt
+RUN update-ca-certificates

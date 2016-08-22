@@ -1,0 +1,11 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 1941
+
+ADD ./bin/Debug/netcoreapp1.0/publish /app
+ADD ./project.json /app/
+ADD ./idsrv3test.pfx /app/
+ADD ./UI /app/ui
+WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT Development
+
+ENTRYPOINT ["dotnet","Host.dll"]

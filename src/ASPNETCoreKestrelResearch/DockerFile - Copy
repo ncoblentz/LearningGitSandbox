@@ -1,0 +1,10 @@
+﻿FROM microsoft/dotnet:latest
+EXPOSE 5000
+RUN apt-get update
+RUN apt-get install sqlite3
+
+ADD . /app
+WORKDIR /app
+RUN ["dotnet","restore"]
+RUN ["dotnet","ef","database","update"]
+ENTRYPOINT ["dotnet","run"]
