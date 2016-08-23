@@ -42,7 +42,7 @@ namespace Host
                 options.UserInteractionOptions.ConsentUrl = "/ui/consent";
                 options.UserInteractionOptions.ErrorUrl = "/ui/error";
                 options.RequireSsl = true;
-                options.IssuerUri = "https://loadbalancer:1943";
+                //options.IssuerUri = "https://loadbalancer:1943";
             })                
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryScopes(Scopes.Get())
