@@ -244,4 +244,3 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /src/ASPNETCoreKestrelResearch/aspnetcorekestrel.db
-/src/Docker/loadbalancer/ca/private/
