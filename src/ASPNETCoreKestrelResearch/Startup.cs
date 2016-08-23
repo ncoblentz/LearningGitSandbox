@@ -28,6 +28,7 @@ using System.Security.Claims;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace ASPNETCoreKestrelResearch
 {
@@ -165,7 +166,7 @@ namespace ASPNETCoreKestrelResearch
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "oidccookies",                
-                Events = new MyCookieAuthenticationEvents(app.ApplicationServices.GetService<ApplicationDbContext>(), loggerFactory)
+                Events = new MyCookieAuthenticationEvents(app.ApplicationServices.GetService<ApplicationDbContext>(), loggerFactory)                
             });
 
             var oidcOptions = new OpenIdConnectOptions
@@ -178,12 +179,12 @@ namespace ASPNETCoreKestrelResearch
                 ClientSecret = "secret",
                 ResponseType = "code id_token",
                 SaveTokens = true,
-                GetClaimsFromUserInfoEndpoint = true,                                
+                GetClaimsFromUserInfoEndpoint = true,
                 TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = "name",
                     RoleClaimType = "role"
-                }
+                }                                
             };
 
             oidcOptions.Scope.Clear();
@@ -229,7 +230,7 @@ namespace ASPNETCoreKestrelResearch
         {
             _dbContext = dbContext;
             _loggerFactory = loggerFactory;
-        }
+        }        
         public override async Task SignedIn(CookieSignedInContext context)
         {
             var logger = _loggerFactory.CreateLogger("MyCookieAuthenticationEvents");

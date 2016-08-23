@@ -43,6 +43,11 @@ namespace ASPNETCoreKestrelResearch.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
+            if(User.Identities.Any(id => id.IsAuthenticated && id.HasClaim("iss", "https://loadbalancer:1943")))
+            {
+                return RedirectToAction("TestOIDC", "Home");
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
