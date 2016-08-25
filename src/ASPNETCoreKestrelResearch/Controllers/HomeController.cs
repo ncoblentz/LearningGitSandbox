@@ -37,7 +37,11 @@ namespace ASPNETCoreKestrelResearch.Controllers
                 $"Authenticated: {User.Identity.IsAuthenticated}",
                 $"Claims:"
             };
-            messages.AddRange(User.Claims.Select(c => $"{c.Type}: {c.Value}"));
+            foreach(var identity in User.Identities)
+            {
+                messages.AddRange(identity.Claims.Select(c => $"{c.Type}: {c.Value}"));
+            }
+            //messages.AddRange(User.Claims.Select(c => $"{c.Type}: {c.Value}"));
 
             OIDCUser user = _dbContext.OIDCUsers.FirstOrDefault(u => u.Subject == User.Claims.First(c => c.Type == "sub").Value);
             if(user!=null)

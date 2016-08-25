@@ -17,6 +17,17 @@ namespace Host.Configuration
 
                 new Scope
                 {
+                    Name = "mvcaccess",
+                    DisplayName = "Access to the MVC Application",
+                    Type = ScopeType.Resource,
+                    Claims = new List<ScopeClaim>
+                    {
+                        new ScopeClaim("mvclogin")
+                    }
+                },
+
+                new Scope
+                {
                     Name = "api1",
                     DisplayName = "API 1",
                     Description = "API 1 features and data",
