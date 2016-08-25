@@ -183,21 +183,22 @@ namespace ASPNETCoreKestrelResearch
                 TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = "name",
-                    RoleClaimType = "role"
-                }                                
+                    RoleClaimType = "role",                    
+                }
             };
 
             oidcOptions.Scope.Clear();
             oidcOptions.Scope.Add("openid");
             oidcOptions.Scope.Add("profile");
+            oidcOptions.Scope.Add("mvcaccess");
 
             app.UseOpenIdConnectAuthentication(oidcOptions);
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",                    
+                    template: "{controller=Home}/{action=Index}/{id?}");                
             });            
         }
     }
@@ -237,7 +238,7 @@ namespace ASPNETCoreKestrelResearch
             logger.LogInformation("Entering SignedIn Event");
             string name = context.Principal.Identity.Name;
             Claim subClaim = context.Principal.Claims.First(c => c.Type == "sub");
-            OIDCUser user = await _dbContext.OIDCUsers.FirstOrDefaultAsync(u => u.Subject == subClaim.Value);
+            OIDCUser user = await _dbContext.OIDCUsers.FirstOrDefaultAsync(u => u.Subject == subClaim.Value);            
             if(user==null)
             {
                 logger.LogInformation("Creating user");

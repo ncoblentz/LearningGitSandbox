@@ -151,7 +151,8 @@ namespace Host.Configuration
                     AllowedScopes = new List<string>
                     {
                         StandardScopes.OpenId.Name,
-                        StandardScopes.Profile.Name
+                        StandardScopes.Profile.Name,
+                        "mvcaccess"
                     },
                 },
 
